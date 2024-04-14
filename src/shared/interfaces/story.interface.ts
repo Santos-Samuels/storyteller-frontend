@@ -5,20 +5,32 @@ import { User } from "./user.interface";
 export interface IStory extends BaseEntity {
   userId: User["id"];
   theme: string;
-  resume: string;
+  summary: string;
   ramifications?: string[];
+  isRamification?: boolean;
 
   user?: User;
 }
 
+export type GPTStoryScene = Pick<
+  IScene,
+  "speech" | "emotion" | "position" | "ramificationTheme"
+>;
+
 export interface GPTStory {
   theme: IStory["theme"];
-  resume: IStory["resume"];
-  ramifications: IStory["ramifications"];
+  summary: IStory["summary"];
+  ramifications?: IStory["ramifications"];
+  isRamification: IStory["isRamification"];
 
-  scenes: Pick<IScene, "speech" | "emotion" | "position">[];
+  scenes: GPTStoryScene[];
 }
 
 export interface CreateStoryDTO {
   theme: string;
 }
+
+export type CreateStoryResponse = {
+  mainStory: GPTStory;
+  ramificationsStories?: GPTStory[];
+};

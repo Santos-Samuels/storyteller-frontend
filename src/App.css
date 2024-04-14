@@ -73,7 +73,22 @@
 .tag {
   padding: 1px 0.5em;
   border-radius: 8px;
-  background-color: #646cff;
+  color: #414141;
+  background-color: #ebebeb;
+  font-size: 0.7em;
+}
+
+.tag-active {
   color: #fff;
-  font-size: 0.8em;
+  background-color: #646cff;
+}
+
+.tag-interacted {
+  color: #fff;
+  background-color: #a3a8fd;
+}
+
+.primary {
+  color: #fff;
+  background-color: #646cff;
 }

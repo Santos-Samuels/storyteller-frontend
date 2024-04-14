@@ -1,35 +1,101 @@
-import { CreateStoryDTO, GPTStory } from "@/shared/interfaces/story.interface";
-import StoryService from "@/shared/services/story.service";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { CreateStoryForm, SceneList, StoryDetails } from "@/components";
+import InteractiveScenes from "@/components/molecules/InteractiveScenes";
+import { AppContext } from "@/context/AppContext";
+import { useContext, useEffect, useState } from "react";
 
-export const CreateStoryScreen = () => {
-  const [theme, setTheme] = useState<string>("");
-  const [story, setStory] = useState<GPTStory>();
-  const [activeSlide, setActiveSlide] = useState<number>(0);
+const CreateStoryScreen = () => {
+  const { story, currentTheme, isMainStory, setCurrentTheme, setIsMainStory } =
+    useContext(AppContext);
+  const [interactedRamification, setInteractedRamification] = useState<
+    string[]
+  >([]);
+  const [isInteractiveTime, setIsInteractiveTime] = useState<boolean>(false);
+  const [mainStoryPausedIndex, setMainStoryPausedIndex] = useState<number>(0);
 
-  const { isPending, data, mutate, isError, error, isSuccess } = useMutation({
-    mutationKey: ["createStory"],
-    mutationFn: createStoryQuery,
-  });
+  const handleUpdateCurrentTheme = (swiperIndex: number) => {
+    if (!isMainStory || !story) return;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    mutate({ theme });
+    const themeByIndex =
+      story.mainStory.scenes[swiperIndex]?.ramificationTheme ||
+      story.mainStory.theme;
+
+    const isRamification =
+      story.mainStory.ramifications?.includes(themeByIndex);
+    if (isRamification && !interactedRamification.includes(themeByIndex)) {
+      setInteractedRamification((prev) => [...prev, themeByIndex]);
+      setMainStoryPausedIndex(swiperIndex);
+      setIsInteractiveTime(true);
+    }
+
+    setCurrentTheme(themeByIndex);
   };
 
-  const getFakeCaracterName = (index: number) => {
-    if (index % 2 === 0) return "João";
-    return "Maria";
+  const handleInteractiveAnswer = (value: boolean) => {
+    if (value) {
+      setIsMainStory(false);
+    }
+
+    setIsInteractiveTime(false);
+  };
+
+  const renderSceneList = () => {
+    if (isInteractiveTime)
+      return (
+        <InteractiveScenes
+          currentTheme={currentTheme}
+          isInteractiveTime={isInteractiveTime}
+          handleInteractiveAnswer={handleInteractiveAnswer}
+        />
+      );
+
+    if (!isMainStory) {
+      const ramificationScenes =
+        story?.ramificationsStories?.find(
+          (ramification) => ramification.theme === currentTheme
+        )?.scenes || [];
+
+      return (
+        <SceneList
+          key={"ramification-story"}
+          scenes={ramificationScenes}
+          handleUpdateCurrentTheme={handleUpdateCurrentTheme}
+          footerComponent={renderListFooter}
+        />
+      );
+    }
+
+    const scenes = story?.mainStory.scenes || [];
+    return (
+      <SceneList
+        key="main-story"
+        scenes={scenes}
+        initialSlide={mainStoryPausedIndex}
+        handleUpdateCurrentTheme={handleUpdateCurrentTheme}
+        footerComponent={renderListFooter}
+      />
+    );
+  };
+
+  const renderListFooter = (activeSlide: number, total: number) => {
+    if (isMainStory || activeSlide !== total - 1) return;
+
+    return (
+      <a
+        onClick={() => {
+          setIsMainStory(true);
+        }}
+      >
+        Voltar para história principal
+      </a>
+    );
   };
 
   useEffect(() => {
-    if (!data) return;
-    setStory(data);
-    setTheme("");
-  }, [data]);
+    if (!story) return;
+
+    setCurrentTheme(story.mainStory.theme);
+    setIsMainStory(true);
+  }, []);
 
   return (
     <>
@@ -38,82 +104,23 @@ export const CreateStoryScreen = () => {
         <p className="label">Deixe-me contar uma história para você.</p>
       </div>
 
-      <form className="row" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Digite um tema"
-          required
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-          className="input"
-          disabled={isPending}
-        />
+      <CreateStoryForm />
 
-        <button type="submit" className="button" disabled={!theme || isPending}>
-          Criar
-        </button>
-      </form>
-
-      {isPending && <p className="label">Carregando...</p>}
-
-      {story && !isPending && (
+      {story && (
         <section className="story-container">
-          <div className="story-info">
-            <h3>{story.theme}</h3>
-            <p className="label">{story.resume}</p>
+          <StoryDetails
+            theme={story.mainStory.theme}
+            summary={story.mainStory.summary}
+            currentTheme={currentTheme}
+            interactedRamification={interactedRamification}
+            ramifications={story.mainStory.ramifications}
+          />
 
-            <div className="tag-container">
-              {story.ramifications?.map((ramification, index) => (
-                <p key={index} className="tag">
-                  {ramification}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={50}
-            onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
-            navigation={{
-              prevEl: ".prev",
-              nextEl: ".next",
-            }}
-          >
-            {story.scenes.map((item, index) => (
-              <SwiperSlide key={index}>
-                <p className={`character-name text-${item.position}`}>
-                  {getFakeCaracterName(index)}
-                </p>
-                <div className={`speech text-${item.position}`}>
-                  {item.speech}
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <div className="row">
-            <button type="button" className="button prev">
-              Anterior
-            </button>
-
-            <p className="label">
-              {activeSlide + 1} de {story.scenes.length}
-            </p>
-
-            <button type="button" className="button next">
-              Próximo
-            </button>
-          </div>
+          {renderSceneList()}
         </section>
       )}
     </>
   );
 };
 
-const createStoryQuery = async (params: CreateStoryDTO) => {
-  const { createStory } = StoryService;
-
-  const { data } = await createStory(params);
-  return data;
-};
+export default CreateStoryScreen;

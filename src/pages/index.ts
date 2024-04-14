@@ -1,4 +1,4 @@
-import { CreateStoryScreen } from "./CreateStoryScreen";
+import CreateStoryScreen from "./CreateStoryScreen";
 
 export { CreateStoryScreen };
 
