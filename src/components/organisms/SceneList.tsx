@@ -1,4 +1,4 @@
-import { GPTStoryScene } from "@/shared/interfaces/story.interface";
+import { IScene } from "@/shared/interfaces/scene.interface";
 import { FC, ReactNode, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,7 +6,7 @@ import SceneCard from "../molecules/SceneCard";
 import SceneControlButtons from "../molecules/SceneControlButtons";
 
 interface SceneListProps {
-  scenes: GPTStoryScene[];
+  scenes: IScene[];
   initialSlide?: number;
   handleUpdateCurrentTheme: (index: number) => void;
   footerComponent?: (activeSldie: number, total: number) => ReactNode;
@@ -36,9 +36,9 @@ const SceneList: FC<SceneListProps> = ({
         }}
         initialSlide={initialSlide}
       >
-        {scenes.map((item, index) => (
+        {scenes.map((item) => (
           <SwiperSlide key={item.speech}>
-            <SceneCard scene={item} index={index} />
+            <SceneCard scene={item} />
           </SwiperSlide>
         ))}
       </Swiper>

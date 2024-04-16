@@ -92,3 +92,27 @@
   color: #fff;
   background-color: #646cff;
 }
+
+.scene-card-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.scene-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.caracter-image {
+  height: 120px;
+  object-fit: cover;
+}

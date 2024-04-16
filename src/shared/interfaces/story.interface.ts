@@ -10,20 +10,7 @@ export interface IStory extends BaseEntity {
   isRamification?: boolean;
 
   user?: User;
-}
-
-export type GPTStoryScene = Pick<
-  IScene,
-  "speech" | "emotion" | "position" | "ramificationTheme"
->;
-
-export interface GPTStory {
-  theme: IStory["theme"];
-  summary: IStory["summary"];
-  ramifications?: IStory["ramifications"];
-  isRamification: IStory["isRamification"];
-
-  scenes: GPTStoryScene[];
+  scenes?: IScene[];
 }
 
 export interface CreateStoryDTO {
@@ -31,6 +18,6 @@ export interface CreateStoryDTO {
 }
 
 export type CreateStoryResponse = {
-  mainStory: GPTStory;
-  ramificationsStories?: GPTStory[];
+  mainStory: IStory;
+  ramificationsStories?: IStory[];
 };

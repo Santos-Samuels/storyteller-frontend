@@ -8,17 +8,18 @@ interface InteractiveScenesProps {
   handleInteractiveAnswer: (value: boolean) => void;
 }
 
-const InteractiveScenes: FC<InteractiveScenesProps> = ({currentTheme, handleInteractiveAnswer}) => {
+const InteractiveScenes: FC<InteractiveScenesProps> = ({
+  currentTheme,
+  handleInteractiveAnswer,
+}) => {
   return (
     <>
       <SceneCard
         scene={{
-          emotion: "thinking",
           position: "left",
           speech: sortRamificationSentence(currentTheme),
-          ramificationTheme: currentTheme,
+          caracterSpriteUrl: "",
         }}
-        index={0}
       />
 
       <div className="row">

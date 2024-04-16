@@ -1,10 +1,10 @@
-import { GPTStory } from "@/shared/interfaces/story.interface";
+import { IStory } from "@/shared/interfaces/story.interface";
 import { FC } from "react";
 
 interface StoryDetailsProps {
-  theme: GPTStory["theme"];
-  summary: GPTStory["summary"];
-  ramifications?: GPTStory["ramifications"];
+  theme: IStory["theme"];
+  summary: IStory["summary"];
+  ramifications?: IStory["ramifications"];
   currentTheme: string;
   interactedRamification: string[];
 }

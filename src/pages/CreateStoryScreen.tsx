@@ -16,7 +16,7 @@ const CreateStoryScreen = () => {
     if (!isMainStory || !story) return;
 
     const themeByIndex =
-      story.mainStory.scenes[swiperIndex]?.ramificationTheme ||
+      story.mainStory?.scenes?.[swiperIndex]?.ramificationTheme ||
       story.mainStory.theme;
 
     const isRamification =
@@ -95,7 +95,7 @@ const CreateStoryScreen = () => {
 
     setCurrentTheme(story.mainStory.theme);
     setIsMainStory(true);
-  }, []);
+  }, [story]);
 
   return (
     <>
