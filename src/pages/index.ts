@@ -1,4 +1,4 @@
-import CreateStoryScreen from "./CreateStoryScreen";
+import HomeScreen from "./HomeScreen/HomeScreen";
 
-export { CreateStoryScreen };
+export { HomeScreen };
 

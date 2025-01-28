@@ -1,4 +1,4 @@
-import { CreateStoryResponse } from "@/shared/interfaces/story.interface";
+import { IStory } from "@/shared/interfaces/story.entity";
 import {
   createContext,
   Dispatch,
@@ -8,10 +8,10 @@ import {
 } from "react";
 
 interface ContextProps {
-  story?: CreateStoryResponse;
+  story?: IStory;
   currentTheme: string;
   isMainStory: boolean;
-  setStory: Dispatch<SetStateAction<CreateStoryResponse | undefined>>;
+  setStory: Dispatch<SetStateAction<IStory | undefined>>;
   setCurrentTheme: Dispatch<SetStateAction<string>>;
   setIsMainStory: Dispatch<SetStateAction<boolean>>;
 }
@@ -19,7 +19,7 @@ interface ContextProps {
 const AppContext = createContext<ContextProps>({} as ContextProps);
 
 const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [story, setStory] = useState<CreateStoryResponse>();
+  const [story, setStory] = useState<IStory>();
   const [currentTheme, setCurrentTheme] = useState<string>("");
   const [isMainStory, setIsMainStory] = useState<boolean>(false);
 

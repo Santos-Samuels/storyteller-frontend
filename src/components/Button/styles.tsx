@@ -42,13 +42,18 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
   &:focus,
   &:active {
     background-color: ${({ theme, $type }) =>
-      theme.pallete.button[`${$type}Active`].background};
+      theme.pallete.button[
+        `${$type}Active` as keyof typeof theme.pallete.button
+      ].background};
   }
 
   &:hover p,
   &:focus p,
   &:active p {
-    color: ${({ theme, $type }) => theme.pallete.button[`${$type}Active`].text};
+    color: ${({ theme, $type }) =>
+      theme.pallete.button[
+        `${$type}Active` as keyof typeof theme.pallete.button
+      ].text};
   }
 
   &:disabled {
