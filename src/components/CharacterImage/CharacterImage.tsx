@@ -6,14 +6,22 @@ interface CharacterImageProps {
   height?: number;
 }
 
+// Mapeia todas as imagens dentro da pasta
+const images = import.meta.glob("../../assets/charactersSprites/*");
+
 const CharacterImage: FC<CharacterImageProps> = ({ height = 200, path }) => {
   const [image, setImage] = useState<string>();
 
   const getCharacterImage = async () => {
     try {
-      const basePath = "../../assets/charactersSprites/";
-      const imagePath = await import(basePath.concat(path));
-      setImage(imagePath.default);
+      const imageImport = images[`../../assets/charactersSprites/${path}`];
+
+      if (!imageImport) {
+        throw new Error("Imagem não encontrada");
+      }
+
+      const module = (await imageImport()) as any;
+      setImage(module.default);
     } catch (error) {
       console.error(error);
     }
@@ -21,7 +29,7 @@ const CharacterImage: FC<CharacterImageProps> = ({ height = 200, path }) => {
 
   useEffect(() => {
     getCharacterImage();
-  }, []);
+  }, [path]);
 
   if (!image) return;
   return <S.CharacterImage $avatarImageHeight={height ?? 100} src={image} />;
