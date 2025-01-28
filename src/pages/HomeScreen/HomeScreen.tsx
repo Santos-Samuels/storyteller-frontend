@@ -22,9 +22,7 @@ const HomeScreen = () => {
     currentSceneId: ISceneCharacter["id"],
     chosenOptionId?: IUserInteractionOption["id"]
   ) => {
-    const scene = scenes.find(
-      (item) => item.id === currentSceneId
-    );
+    const scene = scenes.find((item) => item.id === currentSceneId);
     if (!scene) return;
 
     if (chosenOptionId && scene.interaction) {
@@ -51,6 +49,8 @@ const HomeScreen = () => {
 
   return (
     <>
+      <S.StoryTitle variant="h2" children={mockedStory.title} />
+
       <S.Container>
         <ReadedSceneSection
           readedScenes={readedScenes}
@@ -63,11 +63,12 @@ const HomeScreen = () => {
           onPressBalloon={handleClickItem}
         />
       </S.Container>
-
-      {readedScenes.length <= 3 && <S.StyledTypography
-        variant="label3"
-        children="Toque no balão para avançar"
-      />}
+      {readedScenes.length <= 3 && (
+        <S.StyledTypography
+          variant="label3"
+          children="Toque no balão para avançar"
+        />
+      )}
     </>
   );
 };

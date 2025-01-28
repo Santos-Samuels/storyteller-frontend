@@ -15,8 +15,14 @@ export const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(2)};
 `;
 
+export const StoryTitle = styled(Typography)`
+  text-align: center;
+  /* color: ${({ theme }) => theme.pallete.colors.neutral.gray["300"]}; */
+  margin-bottom: ${({ theme }) => theme.spacing(3)};
+`;
+
 export const StyledTypography = styled(Typography)`
   text-align: center;
-  color: ${({ theme }) => theme.pallete.colors.neutral.gray["300"]};
+  color: ${({ theme }) => theme.pallete.colors.neutral.gray["500"]};
   margin-top: ${({ theme }) => theme.spacing(1)};
 `;
