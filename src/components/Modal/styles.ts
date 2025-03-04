@@ -11,8 +11,9 @@ export const Overlay = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  max-width: 60%;
+  max-width: 1100px;
   margin: 50px auto;
+  padding: ${({ theme }) => theme.spacing(2)};
   overflow: hidden;
   height: calc(100vh - 100px);
 `;

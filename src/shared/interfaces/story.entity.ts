@@ -14,3 +14,14 @@ export interface IStory extends BaseEntity {
   characters?: ICharacter[];
   sceneCharacters?: ISceneCharacter[];
 }
+
+export enum StorySizeEnum {
+  "Short" = 10,
+  "Normal" = 20,
+  "Long" = 30,
+}
+
+export interface GenerateStoryDTO {
+  theme: string;
+  amountScenes: number;
+}

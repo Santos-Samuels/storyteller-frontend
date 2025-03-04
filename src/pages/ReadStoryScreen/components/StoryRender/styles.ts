@@ -1,6 +1,6 @@
 import { Typography } from "@/components";
 import styled from "styled-components";
-import bgImage from "../../assets/bgImage.jpg";
+import bgImage from "../../../../assets/bgImage.jpg";
 
 export const Container = styled.div`
   display: flex;

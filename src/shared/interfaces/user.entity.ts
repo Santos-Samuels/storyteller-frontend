@@ -6,6 +6,7 @@ export interface IUser extends BaseEntity {
   email: string;
   password?: string;
   roleId: IRole["id"];
+  apiKey: string;
 
   role?: IRole;
 }

@@ -4,262 +4,6 @@ import {
 } from "@/shared/interfaces/character.entity";
 import { IStory } from "@/shared/interfaces/story.entity";
 
-// export const mockedStory: IStory = {
-//   id: "uuid-story",
-//   theme: "Números Binários",
-//   title: "Entendendo o Sistema Binário",
-//   intro:
-//     "Em um dia ensolarado, dois amigos se encontram no parque para discutir um mistério matemático: os números binários. Enquanto conversam, aprendem mais sobre como esse sistema funciona e como pode ser aplicado no mundo real.",
-//   summary:
-//     "Dois amigos exploram o conceito de números binários por meio de uma conversa interativa e aprendem como eles são usados em computação.",
-//   backgroundUrl: "",
-//   authorId: "uuid-author",
-//   createdAt: new Date(),
-//   characters: [
-//     {
-//       id: "uuid-alex",
-//       name: "Alex",
-//       role: "Estudante curioso",
-//       position: CharacterPositionEnum.LEFT,
-//       gender: CharacterGenderEnum.MALE,
-//       avatarUrl: "MALE_C2_NEUTRAL.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-jordan",
-//       name: "Jordan",
-//       role: "Especialista em Computação",
-//       position: CharacterPositionEnum.RIGHT,
-//       gender: CharacterGenderEnum.MALE,
-//       avatarUrl: "MALE_C1_NEUTRAL.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//   ],
-//   sceneCharacters: [
-//     {
-//       id: "uuid-scene-1",
-//       characterId: "uuid-alex",
-//       order: 1,
-//       speech:
-//         "Jordan, sempre quis entender o que são números binários. Você pode me explicar?",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C2_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-2",
-//       characterId: "uuid-jordan",
-//       order: 2,
-//       speech:
-//         "Claro, Alex! O sistema binário é como um idioma para computadores. Ele usa apenas dois dígitos: 0 e 1.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-3",
-//       characterId: "uuid-jordan",
-//       order: 3,
-//       speech:
-//         "O sistema binário funciona como o sistema decimal que usamos, mas com base 2 em vez de base 10.",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C1_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-4",
-//       characterId: "uuid-alex",
-//       order: 4,
-//       speech:
-//         "Isso significa que cada posição em um número binário representa uma potência de 2?",
-//       emotion: "surprised",
-//       avatarUrl: "MALE_C2_SURPRISED.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-5",
-//       characterId: "uuid-jordan",
-//       order: 5,
-//       speech:
-//         "Exatamente! Por exemplo, o número 101 em binário é equivalente a 5 no sistema decimal.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-6",
-//       characterId: "uuid-jordan",
-//       order: 6,
-//       speech:
-//         "Os números binários são usados em quase tudo relacionado à computação: programação, armazenamento de dados, e até em eletrônica.",
-//       emotion: "excited",
-//       avatarUrl: "MALE_C1_EXCITED.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-7",
-//       characterId: "uuid-jordan",
-//       order: 7,
-//       speech:
-//         "Um exemplo prático é a forma como imagens digitais são armazenadas. Cada pixel tem valores binários para representar cores.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-8",
-//       characterId: "uuid-alex",
-//       order: 8,
-//       speech:
-//         "Então, cada cor em uma imagem é, na verdade, uma sequência de 0s e 1s?",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C2_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-9",
-//       characterId: "uuid-jordan",
-//       order: 9,
-//       speech:
-//         "Exatamente! Esse é um exemplo de como o sistema binário está presente no nosso dia a dia sem percebermos.",
-//       emotion: "very-happy",
-//       avatarUrl: "MALE_C1_VERY_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-10",
-//       characterId: "uuid-jordan",
-//       order: 10,
-//       speech:
-//         "Algo mais teórico seria explicar como a aritmética binária é usada para realizar cálculos em processadores.",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C1_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-11",
-//       characterId: "uuid-alex",
-//       order: 11,
-//       speech: "Isso tem a ver com as portas lógicas que aprendemos em física?",
-//       emotion: "confused",
-//       avatarUrl: "MALE_C2_CONFUSED.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-12",
-//       characterId: "uuid-jordan",
-//       order: 12,
-//       speech:
-//         "Exatamente, Alex! As portas lógicas como AND, OR e NOT processam os 0s e 1s para realizar operações lógicas e matemáticas.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-13",
-//       characterId: "uuid-alex",
-//       order: 13,
-//       speech:
-//         "E como os computadores transformam essas operações lógicas em ações reais?",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C2_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-14",
-//       characterId: "uuid-jordan",
-//       order: 14,
-//       speech:
-//         "Os processadores combinam essas operações para realizar tarefas complexas, como exibir esta conversa em uma tela.",
-//       emotion: "excited",
-//       avatarUrl: "MALE_C1_EXCITED.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-15",
-//       characterId: "uuid-alex",
-//       order: 15,
-//       speech:
-//         "Isso é fascinante! Os números binários são mesmo a base de tudo na computação?",
-//       emotion: "surprised",
-//       avatarUrl: "MALE_C2_SURPRISED.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-16",
-//       characterId: "uuid-jordan",
-//       order: 16,
-//       speech:
-//         "Sim, sem eles nada disso seria possível. Eles permitem que as máquinas entendam comandos humanos.",
-//       emotion: "very-happy",
-//       avatarUrl: "MALE_C1_VERY_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-17",
-//       characterId: "uuid-alex",
-//       order: 17,
-//       speech:
-//         "Como podemos aprender mais sobre os números binários de forma prática?",
-//       emotion: "thinking",
-//       avatarUrl: "MALE_C2_THINKING.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-18",
-//       characterId: "uuid-jordan",
-//       order: 18,
-//       speech:
-//         "Existem ferramentas online que ajudam a converter números binários para decimais e vice-versa. Além disso, podemos criar nossos próprios exemplos.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-19",
-//       characterId: "uuid-alex",
-//       order: 19,
-//       speech:
-//         "Obrigado, Jordan! Essa conversa foi muito útil para entender mais sobre o sistema binário.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C2_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//     {
-//       id: "uuid-scene-20",
-//       characterId: "uuid-jordan",
-//       order: 20,
-//       speech:
-//         "De nada, Alex! Sempre que quiser aprender mais sobre computação, é só me chamar.",
-//       emotion: "happy",
-//       avatarUrl: "MALE_C1_HAPPY.png",
-//       createdAt: new Date(),
-//       storyId: "uuid-story",
-//     },
-//   ],
-// };
-
 export const mockedStory: IStory = {
   id: "story-001",
   theme: "Princípios da Cibersegurança",
@@ -271,6 +15,7 @@ export const mockedStory: IStory = {
   backgroundUrl: "none",
   authorId: "author-001",
   createdAt: new Date(),
+
   characters: [
     {
       id: "char-001",
@@ -357,12 +102,15 @@ export const mockedStory: IStory = {
       avatarUrl: "MALE_C2_EXCITED.png",
       createdAt: new Date(),
       storyId: "story-001",
+
       interaction: {
         id: "interaction-001",
+        createdAt: new Date(),
         storyId: "story-001",
+
         sceneCharacterId: "scene-char-006",
         sentence: "Qual é o próximo passo na nossa investigação?",
-        createdAt: new Date(),
+
         options: [
           {
             id: "interaction-option-001",
@@ -458,12 +206,15 @@ export const mockedStory: IStory = {
       avatarUrl: "MALE_C1_CURIOUS.png",
       createdAt: new Date(),
       storyId: "story-001",
+
       interaction: {
         id: "interaction-002",
+        createdAt: new Date(),
         storyId: "story-001",
+
         sceneCharacterId: "scene-char-013",
         sentence: "Qual foi a causa do desaparecimento do arquivo?",
-        createdAt: new Date(),
+
         options: [
           {
             id: "interaction-option-003",

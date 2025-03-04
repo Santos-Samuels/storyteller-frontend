@@ -14,6 +14,7 @@ interface SceneCharacterItemProps {
   activeItem: ISceneCharacter;
   characters: ICharacter[];
   avatarImageHeight?: number;
+  responsiveAvatarPosition?: boolean;
   handleClick: (
     currentSceneId: ISceneCharacter["id"],
     selectedOption?: IUserInteractionOption
@@ -53,7 +54,11 @@ const SceneCharacterItem: FC<SceneCharacterItemProps> = (props) => {
         />
       )}
 
-      <S.Container>
+      <S.Container
+        $position={
+          props.responsiveAvatarPosition ? character?.position : undefined
+        }
+      >
         {character?.position === CharacterPositionEnum.LEFT && (
           <CharacterImage
             height={props.avatarImageHeight}

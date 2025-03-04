@@ -86,6 +86,7 @@ const SceneControl: FC<SceneCharacterListProps> = (props) => {
       characters={props.characters}
       handleClick={handleOnPressBalloon}
       avatarImageHeight={300}
+      responsiveAvatarPosition
       typeAnimation
     />
   );

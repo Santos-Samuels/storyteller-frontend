@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import { AppProvider } from "./context/AppContext";
 import AppRoutes from "./routes/app.routes";
@@ -12,6 +13,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <AppProvider>
           <AppRoutes />
+          <ToastContainer position="bottom-right" />
         </AppProvider>
       </ThemeProvider>
     </QueryClientProvider>
