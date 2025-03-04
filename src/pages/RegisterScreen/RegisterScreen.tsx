@@ -1,11 +1,33 @@
-import PageTitle from "@/components/PageTitle/PageTitle";
+import { PageTitle } from "@/components";
+import { AuthRegisterDTO } from "@/shared/interfaces/auth.entity";
+import AuthService from "@/shared/services/auth.service";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import { useMutation } from "@tanstack/react-query";
 import { Button, Form, Input, Tooltip } from "antd";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as S from "./styles";
 
 const RegisterScreen = () => {
-  const onFinish = (values: any) => {
-    console.log("Cadastro:", values);
+  const navigate = useNavigate();
+
+  const onSucess = () => {
+    toast.success("Cadastro realizado com sucesso");
+    navigate("/auth/login");
+  };
+
+  const mutation = useMutation({
+    mutationKey: ["register"],
+    mutationFn: AuthService.register,
+    onSuccess: onSucess,
+    onError: (error: AxiosError<any>) => {
+      toast.error(error.response?.data?.message || "Erro ao realizar cadastro");
+    },
+  });
+
+  const onFinish = (values: AuthRegisterDTO) => {
+    mutation.mutate(values);
   };
 
   return (
@@ -13,7 +35,11 @@ const RegisterScreen = () => {
       <S.SignupBox>
         <PageTitle title="Storyteller" subtitle="Faça seu cadastro!" />
 
-        <Form layout="vertical" onFinish={onFinish}>
+        <Form
+          layout="vertical"
+          onFinish={onFinish}
+          disabled={mutation.isPending}
+        >
           <Form.Item
             label="E-mail"
             name="email"
@@ -75,13 +101,18 @@ const RegisterScreen = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={mutation.isPending}
+            >
               Confirmar Cadastro
             </Button>
           </Form.Item>
         </Form>
 
-        <S.StyledLink href="/login">
+        <S.StyledLink href="/auth/login">
           <S.StyledTypography variant="label2" children="Já tenho uma conta" />
         </S.StyledLink>
       </S.SignupBox>

@@ -1,10 +1,33 @@
-import PageTitle from "@/components/PageTitle/PageTitle";
+import { PageTitle } from "@/components";
+import { AuthLoginDTO, IAuthData } from "@/shared/interfaces/auth.entity";
+import AuthService from "@/shared/services/auth.service";
+import { useMutation } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
+import { AxiosError, AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as S from "./styles";
 
 const LoginScreen = () => {
-  const onFinish = (values: any) => {
-    console.log("Login:", values);
+  const navigate = useNavigate();
+
+  const onSucess = (_data: AxiosResponse<IAuthData>) => {
+    toast.success("Você está logado!");
+    navigate("/story/create");
+    //TODO: set token in local storage
+  };
+
+  const mutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: AuthService.login,
+    onSuccess: onSucess,
+    onError: (error: AxiosError<any>) => {
+      toast.error(error.response?.data?.message || "Erro ao realizar login");
+    },
+  });
+
+  const onFinish = (values: AuthLoginDTO) => {
+    mutation.mutate(values);
   };
 
   return (
@@ -41,13 +64,18 @@ const LoginScreen = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={mutation.isPending}
+            >
               Confirmar Login
             </Button>
           </Form.Item>
         </Form>
 
-        <S.StyledLink href="/register">
+        <S.StyledLink href="/auth/register">
           <S.StyledTypography variant="label2" children="Criar conta" />
         </S.StyledLink>
       </S.LoginBox>
