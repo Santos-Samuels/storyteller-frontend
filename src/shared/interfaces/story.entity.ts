@@ -10,6 +10,7 @@ export interface IStory extends BaseEntity {
   summary: string;
   backgroundUrl: string; // no implement
   authorId: IUser["id"];
+  readyToPreview?: boolean;
 
   characters?: ICharacter[];
   sceneCharacters?: ISceneCharacter[];
