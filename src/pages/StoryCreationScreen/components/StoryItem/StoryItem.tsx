@@ -67,7 +67,14 @@ const StoryItem: FC<StoryItemProps> = (props) => {
             </S.CharacterItem>
           ))}
 
-          <img src={"https://i.sstatic.net/BIPZz.png"} alt="background" />
+          <div>
+            <S.StyledImage
+              width={200}
+              src={props.story.backgroundUrl}
+              alt="background"
+            />
+            <S.CharacterName variant="body1" children="Imagem de fundo" />
+          </div>
         </S.CharactersContainer>
       ) : (
         <S.ActionActionsContainer>

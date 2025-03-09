@@ -1,5 +1,5 @@
-import { PageTitle, Typography } from "@/components";
-import { Input } from "antd";
+import { CharacterImage, PageTitle, Typography } from "@/components";
+import { Button, Input } from "antd";
 import { FC } from "react";
 import { PickedCharacterState } from "../AppearanceForm/AppearanceForm";
 import * as S from "./styles";
@@ -19,43 +19,56 @@ const BackgroundPicker: FC<BackgroundPickerProps> = (props) => {
       />
 
       <S.InstructionsContainer>
-        <Typography variant="label1">
+        <Typography variant="label2">
           <S.StyledCheckIcon />
           Escolha uma imagem com link válido
         </Typography>
 
-        <Typography variant="label1">
+        <Typography variant="label2">
           <S.StyledCheckIcon />
           Evite imagens com muitos detalhes
         </Typography>
 
-        <Typography variant="label1">
+        <Typography variant="label2">
           <S.StyledCheckIcon />
           Escolha uma imagem que realce os personagens
         </Typography>
+
+        <Typography variant="label2">
+          <S.StyledCheckIcon />
+          Evite url que termine com a extensão da imagem como .png ou .jpg
+        </Typography>
+
+        <Button type="link" href="https://www.freepik.com/" target="_blank">
+          Recomendação de site de imagens gratuitas:
+        </Button>
       </S.InstructionsContainer>
 
       <S.InputContainer>
         <Input
           placeholder="Link da imagem"
           value={props.bgUrl}
+          type="url"
           onChange={(e) => props.onChangeBgUrl(e.target.value)}
         />
 
-        {/* <Typography variant="h4" children="Preview" />
+        {props.bgUrl && (
+          <div>
+            <S.StyledTypography variant="h4" children="Preview" />
 
-        <S.BgPreviewContainer $bgUrl={props.bgUrl}>
-          {Object.values(props.pickedCharacters).map((character) => (
-            <div key={character.id}>
-              <CharacterImage
-                key={character.id}
-                path={character.avatarUrl}
-                height={100}
-              />
-            </div>
-          ))}
-          <img src={"https://i.sstatic.net/BIPZz.png"} alt="background" />
-        </S.BgPreviewContainer> */}
+            <S.BgPreviewContainer $bgUrl={props.bgUrl}>
+              {Object.values(props.pickedCharacters).map((character) => (
+                <div key={character.id}>
+                  <CharacterImage
+                    key={character.id}
+                    path={character.avatarUrl}
+                    height={130}
+                  />
+                </div>
+              ))}
+            </S.BgPreviewContainer>
+          </div>
+        )}
       </S.InputContainer>
     </div>
   );

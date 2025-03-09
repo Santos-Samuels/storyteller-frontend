@@ -1,5 +1,6 @@
 import { Typography } from "@/components";
 import { DeleteFilled, ExclamationCircleFilled } from "@ant-design/icons";
+import { Image } from "antd";
 import styled from "styled-components";
 
 export const StoryItemContainer = styled.div`
@@ -29,6 +30,7 @@ export const CharactersContainer = styled.div`
   gap: ${({ theme }) => theme.spacing(3)};
   margin-top: ${({ theme }) => theme.spacing(1)};
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 export const CharacterItem = styled.div`
@@ -68,4 +70,10 @@ export const ActionActionsContainer = styled.div`
   gap: ${({ theme }) => theme.spacing(2)};
   justify-content: center;
   margin-top: ${({ theme }) => theme.spacing(2)};
+`;
+
+export const StyledImage = styled(Image)`
+  max-width: 200px;
+  height: 100%;
+  margin-bottom: ${({ theme }) => theme.spacing(1)};
 `;

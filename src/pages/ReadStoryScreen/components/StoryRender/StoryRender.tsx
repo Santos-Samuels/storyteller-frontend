@@ -58,7 +58,7 @@ const StoryRender: FC<IStoryRenderProps> = (props) => {
     <>
       {props.showTitle && <PageTitle title={props.story?.title} />}
 
-      <S.Container>
+      <S.Container $bgUrl={props.story?.backgroundUrl}>
         <ReadedSceneSection
           readedScenes={readedScenes}
           characters={props.story?.characters}

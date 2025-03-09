@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Typography } from "@/components";
 import { FC, HtmlHTMLAttributes } from "react";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
@@ -28,17 +28,20 @@ export const InputContainer = styled.div`
   gap: ${({ theme }) => theme.spacing(2)};
 `;
 
-// background-image: ${({ $bgUrl }) => `url(${$bgUrl})`};
 export const BgPreviewContainer: FC<BgPreviewContainerProps> = styled.div<BgPreviewContainerProps>`
   display: flex;
   justify-content: space-between;
-  padding-top: ${({ theme }) => theme.spacing(2)};
-  background-image: url(https://i.sstatic.net/90nGa.jpg);
+  align-items: end;
+
+  padding: ${({ theme }) => theme.spacing(2)};
+  background-image: ${({ $bgUrl }) => `url(${$bgUrl})`};
   background-size: cover;
   background-position: center;
+  height: 200px;
+  border-radius: ${({ theme }) => theme.card.borderRadius.md};
 `;
 
 export const StyledTypography = styled(Typography)`
   text-align: center;
-  color: ${({ theme }) => theme.pallete.colors.neutral.gray["600"]};
+  margin-bottom: ${({ theme }) => theme.spacing(1)};
 `;

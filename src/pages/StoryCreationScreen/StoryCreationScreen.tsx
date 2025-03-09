@@ -3,9 +3,8 @@ import { ICharacter } from "@/shared/interfaces/character.entity";
 import { GenerateStoryDTO, IStory } from "@/shared/interfaces/story.entity";
 import StoryService from "@/shared/services/story.service";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { mockedStory } from "../ReadStoryScreen/mock";
 import AppearanceForm from "./components/AppearanceForm/AppearanceForm";
 import StoryForm from "./components/StoryForm/StoryForm";
 import StoryItem from "./components/StoryItem/StoryItem";
@@ -36,12 +35,13 @@ const StoryCreationScreen = () => {
   };
 
   const onSaveStory = async () => {
-    return new Promise<void>((resolve, reject) => {
-      setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-      setIsPreviewOpen(false);
-      toast.success("História salva com sucesso!");
-      // TODO: redirect to saved story
-    }).catch(() => console.log("Oops errors!"));
+    // return new Promise<void>((resolve, reject) => {
+    //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+    //   setIsPreviewOpen(false);
+    //   toast.success("História salva com sucesso!");
+    //   // TODO: redirect to saved story
+    // }).catch(() => console.log("Oops errors!"));
+    toast.warn("A criação da história ainda não foi implementada!");
   };
 
   const onSaveAppearanceForm = (characters: ICharacter[], bgUrl: string) => {
@@ -68,15 +68,8 @@ const StoryCreationScreen = () => {
 
     setGeneratedStory(storyCopy);
     setIsAppearanceFormOpen(false);
-    toast.success("A aparência foi salva com sucesso!"); //
+    toast.success("A aparência foi salva com sucesso!");
   };
-
-  // TODO: remove useEffect
-  useEffect(() => {
-    setGeneratedStory(mockedStory);
-    if (!mutation.isSuccess) return;
-    setIsAppearanceFormOpen(true);
-  }, [mutation.isSuccess]);
 
   return (
     <PageContainer
@@ -92,6 +85,7 @@ const StoryCreationScreen = () => {
           onOpenAppearanceForm={() => setIsAppearanceFormOpen(true)}
           onOpenPreview={() => setIsPreviewOpen(true)}
           onSave={onSaveStory}
+          // TODO: add loading on save button
         />
       )}
 

@@ -5,6 +5,7 @@ import {
 import { IStory } from "@/shared/interfaces/story.entity";
 import { Button, Modal } from "antd";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 import BackgroundPicker from "../BackgroundPicker/BackgroundPicker";
 import CharactersPicker from "../CharactersPicker/CharactersPicker";
 import * as S from "./styles";
@@ -97,6 +98,13 @@ const AppearanceForm: FC<AppearanceFormProps> = (props) => {
   };
 
   const onSave = () => {
+    const urlRegex = /^(https?:\/\/)?([\w\-]+\.)+[\w]{2,}(:\d+)?(\/[^\s]*)?$/;
+
+    if (!urlRegex.test(backgroundUrl)) {
+      toast.error("Link inválido");
+      return;
+    }
+
     props.onSave(Object.values(pickedCharacters), backgroundUrl);
     clearForm();
   };

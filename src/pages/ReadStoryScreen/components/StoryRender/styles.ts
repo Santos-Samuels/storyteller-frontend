@@ -1,13 +1,17 @@
 import { Typography } from "@/components";
+import { FC, HtmlHTMLAttributes } from "react";
 import styled from "styled-components";
-import bgImage from "../../../../assets/bgImage.jpg";
 
-export const Container = styled.div`
+interface ContainerProps extends HtmlHTMLAttributes<HTMLDivElement> {
+  $bgUrl: string;
+}
+
+export const Container: FC<ContainerProps> = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  background-image: url(${bgImage});
+  background-image: ${({ $bgUrl }) => `url(${$bgUrl})`};
   background-size: cover;
   background-position: center;
   height: 70vh;
