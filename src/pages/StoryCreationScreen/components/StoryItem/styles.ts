@@ -76,4 +76,5 @@ export const StyledImage = styled(Image)`
   max-width: 200px;
   height: 100%;
   margin-bottom: ${({ theme }) => theme.spacing(1)};
+  border-radius: ${({ theme }) => theme.card.borderRadius.md};
 `;

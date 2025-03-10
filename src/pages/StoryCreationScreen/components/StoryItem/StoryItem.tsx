@@ -11,6 +11,7 @@ interface StoryItemProps {
   onOpenAppearanceForm: () => void;
   onSave: () => Promise<void>;
   onDiscart: () => void;
+  isLoading?: boolean;
 }
 
 const StoryItem: FC<StoryItemProps> = (props) => {
@@ -26,6 +27,7 @@ const StoryItem: FC<StoryItemProps> = (props) => {
   };
 
   const onDiscart = () => {
+    if (props.isLoading) return;
     Modal.confirm({
       title: "Tem certeza que deseja descartar a história?",
       content:
@@ -89,7 +91,7 @@ const StoryItem: FC<StoryItemProps> = (props) => {
         {props.story.readyToPreview && (
           <Button
             type="link"
-            disabled={!props.story.readyToPreview}
+            disabled={!props.story.readyToPreview || props.isLoading}
             onClick={props.onOpenAppearanceForm}
           >
             Editar
@@ -97,14 +99,14 @@ const StoryItem: FC<StoryItemProps> = (props) => {
         )}
         <Button
           type="default"
-          disabled={!props.story.readyToPreview}
+          disabled={!props.story.readyToPreview || props.isLoading}
           onClick={props.onOpenPreview}
         >
           Prévia da História
         </Button>
         <Button
           type="primary"
-          disabled={!props.story.readyToPreview}
+          disabled={!props.story.readyToPreview || props.isLoading}
           onClick={props.onSave}
         >
           Salvar

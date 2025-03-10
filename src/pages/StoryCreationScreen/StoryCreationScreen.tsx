@@ -4,6 +4,7 @@ import { GenerateStoryDTO, IStory } from "@/shared/interfaces/story.entity";
 import StoryService from "@/shared/services/story.service";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AppearanceForm from "./components/AppearanceForm/AppearanceForm";
 import StoryForm from "./components/StoryForm/StoryForm";
@@ -14,8 +15,9 @@ const StoryCreationScreen = () => {
   const [isAppearanceFormOpen, setIsAppearanceFormOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [generatedStory, setGeneratedStory] = useState<IStory>();
+  const navigate = useNavigate();
 
-  const mutation = useMutation({
+  const generateMutation = useMutation({
     mutationKey: ["generateStory"],
     mutationFn: StoryService.generate,
     onError: () => {
@@ -26,8 +28,22 @@ const StoryCreationScreen = () => {
     },
   });
 
+  const createMutation = useMutation({
+    mutationKey: ["createStory"],
+    mutationFn: StoryService.create,
+    onError: () => {
+      toast.error("Erro ao salvar a história");
+    },
+    onSuccess(data) {
+      toast.success("História salva com sucesso!");
+      setGeneratedStory(undefined);
+      navigate(`/story/${data.data.id}/read`);
+    },
+  });
+
   const onSubmit = async (values: GenerateStoryDTO) => {
-    mutation.mutate(values);
+    generateMutation.mutate(values);
+    setGeneratedStory(undefined);
   };
 
   const onDiscartStory = () => {
@@ -35,13 +51,8 @@ const StoryCreationScreen = () => {
   };
 
   const onSaveStory = async () => {
-    // return new Promise<void>((resolve, reject) => {
-    //   setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-    //   setIsPreviewOpen(false);
-    //   toast.success("História salva com sucesso!");
-    //   // TODO: redirect to saved story
-    // }).catch(() => console.log("Oops errors!"));
-    toast.warn("A criação da história ainda não foi implementada!");
+    if (!generatedStory) return;
+    createMutation.mutate(generatedStory);
   };
 
   const onSaveAppearanceForm = (characters: ICharacter[], bgUrl: string) => {
@@ -76,7 +87,10 @@ const StoryCreationScreen = () => {
       title="Storyteller"
       subtitle="Escolha um tema e um tamanho pra criar sua história!"
     >
-      <StoryForm onSubmit={onSubmit} isLoading={mutation.isPending} />
+      <StoryForm
+        onSubmit={onSubmit}
+        isLoading={generateMutation.isPending || createMutation.isPending}
+      />
 
       {generatedStory && (
         <StoryItem
@@ -85,7 +99,7 @@ const StoryCreationScreen = () => {
           onOpenAppearanceForm={() => setIsAppearanceFormOpen(true)}
           onOpenPreview={() => setIsPreviewOpen(true)}
           onSave={onSaveStory}
-          // TODO: add loading on save button
+          isLoading={createMutation.isPending}
         />
       )}
 

@@ -12,7 +12,7 @@ export const mockedStory: IStory = {
     "Em uma pequena empresa de tecnologia, um arquivo confidencial desaparece misteriosamente. Dois funcionários, Alex e Bob, começam a investigar o caso, enquanto aprendem sobre cibersegurança.",
   summary:
     "Alex e Bob descobrem que o arquivo sumiu devido a práticas inadequadas de segurança e aprendem a importância dos princípios básicos de cibersegurança.",
-  backgroundUrl: "none",
+  backgroundUrl: "https://img.freepik.com/free-photo/surface-white-planks_23-2147625787.jpg?t=st=1741566805~exp=1741570405~hmac=70fb89db10c8660903ea83700b763bde7768dc15d8cf354b4569d4a4a5d593a3&w=1380",
   authorId: "author-001",
   createdAt: new Date(),
 
