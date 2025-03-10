@@ -28,6 +28,7 @@ const LoginScreen = () => {
 
   const onFinish = (values: AuthLoginDTO) => {
     mutation.mutate(values);
+    navigate("/story/create") // TODO: remove this line
   };
 
   return (

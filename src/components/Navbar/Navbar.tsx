@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = (_props) => {
               label: "Sair",
               key: "/logout",
               icon: <LogoutOutlined />,
-              onClick: () => {},
+              onClick: () => navigate("/auth/login"),
               danger: true,
             },
           ]}

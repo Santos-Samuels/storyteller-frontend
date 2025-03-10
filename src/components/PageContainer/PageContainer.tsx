@@ -41,7 +41,6 @@ const PageContainer: FC<PageContainerProps> = ({
       </S.Container>
     );
 
-  //
   return (
     <S.Container>
       <Navbar />

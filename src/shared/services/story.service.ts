@@ -26,7 +26,7 @@ const StoryService = {
           data: mockedStory,
           status: 200,
         } as AxiosResponse<IStory>);
-      }, 1000);
+      }, 2000);
     });
   },
   create: async (story: IStory) => {
@@ -36,7 +36,7 @@ const StoryService = {
           data: mockedStory,
           status: 200,
         } as AxiosResponse<IStory>);
-      }, 1000);
+      }, 2000);
     });
   },
   getById: async (id: IStory["id"]) => {
@@ -46,7 +46,7 @@ const StoryService = {
           data: mockedStory,
           status: 200,
         } as AxiosResponse<IStory>);
-      }, 1000);
+      }, 2000);
     });
   },
   getAll: async () => {
@@ -56,7 +56,7 @@ const StoryService = {
           data: [mockedStory],
           status: 200,
         } as AxiosResponse<IStory[]>);
-      }, 1000);
+      }, 2000);
     });
   },
   delete: async (id: IStory["id"]) => {
