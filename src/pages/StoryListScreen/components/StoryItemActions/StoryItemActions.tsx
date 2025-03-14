@@ -1,6 +1,7 @@
 import { IStory } from "@/shared/interfaces/story.entity";
 import StoryService from "@/shared/services/story.service";
 import { useMutation } from "@tanstack/react-query";
+import { Button } from "antd";
 import { FC } from "react";
 import { toast } from "react-toastify";
 import * as S from "./styles";
@@ -37,11 +38,12 @@ const StoryItemActions: FC<StoryItemActionsProps> = (props) => {
 
   return (
     <S.Container>
-      <S.StyledDeleteIcon
-        disabled={mutation.isPending}
-        title="Remover"
-        onClick={handleDelete}
-      />
+      <Button type="link" disabled={mutation.isPending} loading={mutation.isPending}>
+        <S.StyledDeleteIcon
+          title="Remover"
+          onClick={handleDelete}
+        />
+      </Button>
       <S.StyledShareIcon title="Compartilhar" onClick={handleShare} />
     </S.Container>
   );

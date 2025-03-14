@@ -20,7 +20,7 @@ const PageContainer: FC<PageContainerProps> = ({
   if (props.isLoading)
     return (
       <S.Container>
-        <Navbar />
+        {showNavbar && <Navbar />}
         <LoadingAnimation />
       </S.Container>
     );
@@ -28,7 +28,7 @@ const PageContainer: FC<PageContainerProps> = ({
   if (props.isError)
     return (
       <S.Container>
-        <Navbar />
+        {showNavbar && <Navbar />}
         <S.ChildrenContainer>
           <Result
             status="error"
@@ -43,10 +43,10 @@ const PageContainer: FC<PageContainerProps> = ({
 
   return (
     <S.Container>
-      <Navbar />
+      {showNavbar && <Navbar />}
 
       <S.ChildrenContainer>
-        {props.title && showNavbar && (
+        {props.title && (
           <S.StyledPageTitle title={props.title} subtitle={props.subtitle} />
         )}
 

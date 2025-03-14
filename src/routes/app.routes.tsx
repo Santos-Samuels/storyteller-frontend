@@ -20,7 +20,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/story/create" element={<StoryCreationScreen />} />
         <Route path="/story/list" element={<StoryListScreen />} />
         <Route path="/story/:id/read" element={<ReadStoryScreen />} />
-        <Route path="/story/:id/read/shared" element={<ReadStoryScreen />} />
+        <Route path="/story/:id/read/shared" element={<ReadStoryScreen isShared={true} />} />
 
         <Route path="/user/profile" element={<UserProfileScreen />} />
 

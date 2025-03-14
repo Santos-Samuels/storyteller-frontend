@@ -14,6 +14,7 @@ export interface IStory extends BaseEntity {
 
   characters?: ICharacter[];
   sceneCharacters?: ISceneCharacter[];
+  author?: IUser;
 }
 
 export enum StorySizeEnum {
