@@ -10,6 +10,7 @@ import * as S from "./styles";
 
 interface StoryItemProps {
   story: IStory;
+  onRefetch: () => void;
 }
 
 const StoryItem: FC<StoryItemProps> = (props) => {
@@ -24,7 +25,7 @@ const StoryItem: FC<StoryItemProps> = (props) => {
       <Card
         title={props.story.title}
         variant="borderless"
-        extra={<StoryItemActions storyId={props.story.id} />}
+        extra={<StoryItemActions storyId={props.story.id} onRefetch={props.onRefetch} />}
       >
         <div onClick={handleNavigate}>
           <Typography variant="body3" children={props.story.summary} />

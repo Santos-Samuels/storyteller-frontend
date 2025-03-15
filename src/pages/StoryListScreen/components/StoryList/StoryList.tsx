@@ -5,6 +5,7 @@ import StoryItem from "../StoryItem/StoryItem";
 
 interface StoryListProps {
   stories?: IStory[];
+  onRefetch: () => void;
 }
 
 const StoryList: FC<StoryListProps> = (props) => {
@@ -20,7 +21,7 @@ const StoryList: FC<StoryListProps> = (props) => {
     <Row gutter={[16, 16]} justify="center">
       {props.stories.map((item) => (
         <Col span={24} md={12} lg={8}>
-          <StoryItem story={item} />
+          <StoryItem story={item} onRefetch={props.onRefetch} />
         </Col>
       ))}
     </Row>

@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import StoryList from "./components/StoryList/StoryList";
 
 const StoryListScreen = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["getStories"],
     queryFn: StoryService.getAll,
+
   });
 
   return (
@@ -15,7 +16,7 @@ const StoryListScreen = () => {
       subtitle="Lista com suas histórias criadas, prontas pra compartilhar."
       isLoading={isLoading}
     >
-      <StoryList stories={data?.data} />
+      <StoryList stories={data?.data} onRefetch={refetch} />
     </PageContainer>
   );
 };

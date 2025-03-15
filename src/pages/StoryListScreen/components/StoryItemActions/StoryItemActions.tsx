@@ -8,14 +8,16 @@ import * as S from "./styles";
 
 interface StoryItemActionsProps {
   storyId: IStory["id"];
+  onRefetch: () => void;
 }
 
 const StoryItemActions: FC<StoryItemActionsProps> = (props) => {
   const mutation = useMutation({
-    mutationKey: ["deleteStory"],
+    mutationKey: ["deleteStory", props.storyId],
     mutationFn: StoryService.delete,
     onSuccess: () => {
       toast.success("História removida com sucesso");
+      props.onRefetch();
     },
     onError: () => {
       toast.error("Erro ao remover história");
@@ -38,11 +40,12 @@ const StoryItemActions: FC<StoryItemActionsProps> = (props) => {
 
   return (
     <S.Container>
-      <Button type="link" disabled={mutation.isPending} loading={mutation.isPending}>
-        <S.StyledDeleteIcon
-          title="Remover"
-          onClick={handleDelete}
-        />
+      <Button
+        type="link"
+        disabled={mutation.isPending}
+        loading={mutation.isPending}
+      >
+        <S.StyledDeleteIcon title="Remover" onClick={handleDelete} />
       </Button>
       <S.StyledShareIcon title="Compartilhar" onClick={handleShare} />
     </S.Container>
