@@ -7,7 +7,6 @@ import * as S from "./styles";
 
 const UserProfileScreen = () => {
   const userId = "a6a78d25-ab8e-4a98-a361-e123f1c6dd3a";
-  const mockedApiKey = "sk-*************";
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getUser", userId],
